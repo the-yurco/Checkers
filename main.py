@@ -1,24 +1,25 @@
+from webbrowser import get
 import pygame
-
-from checkers.constants import VYSKA, SIRKA
+from checkers.constants import SIRKA , VYSKA 
 
 FPS = 60
 
-PLOCHA = pygame.display.set_mode((SIRKA, VYSKA))
-pygame.display.set_caption('SPS IT DAMA PROJEKT')
+PLOCHA = pygame.display.set_mode((SIRKA,VYSKA))
+pygame.display.set_caption('DAMA')
 
 def main():
     ideto = True
-    clock = pygame.time.Clock()
+    cas = pygame.time.Clock()
 
     while ideto:
-        clock.tick(FPS)
+        cas.tick(FPS)
         
-        for udalost in pygame.event.get():
+        for udalost in pygame.event,get():
             if udalost.type == pygame.QUIT:
                 ideto = False
-            if udalost.typr == pygame.MOUSEBUTTONDOWN:
+            if udalost._type == pygame.MOUSEBUTTONDOWN:
                 pass
-            
+
     pygame.quit()
+
 main()
