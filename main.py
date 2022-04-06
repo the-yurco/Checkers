@@ -13,7 +13,7 @@ pygame.display.set_caption('DAMA')
 def main():
     ideto = True
     cas = pygame.time.Clock()
-    plocha = Plocha
+    plocha = Plocha()
 
     while ideto:
         cas.tick(FPS)

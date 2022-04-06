@@ -1,5 +1,5 @@
 import pygame
-from .constants import CIERNA , RIADKY , CERVENA , STVORCEK
+from .constants import CIERNA , RIADKY , FIALOVA , STVORCEK
 
 class Plocha:
     def __init__(self):
@@ -12,4 +12,4 @@ class Plocha:
         plocha.fill(CIERNA)
         for riadok in range(RIADKY):
             for stlpec in range(riadok % 2, RIADKY, 2):
-                pygame.draw.rect(plocha, CERVENA , (riadok * STVORCEK , stlpec * STVORCEK , STVORCEK , STVORCEK))
+                pygame.draw.rect(plocha, FIALOVA , (riadok * STVORCEK , stlpec * STVORCEK , STVORCEK , STVORCEK))
