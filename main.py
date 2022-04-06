@@ -1,6 +1,7 @@
 from webbrowser import get
 import pygame
 from checkers.constants import SIRKA , VYSKA 
+from checkers.plocha import Plocha
 
 pygame.init()
 
@@ -12,6 +13,7 @@ pygame.display.set_caption('DAMA')
 def main():
     ideto = True
     cas = pygame.time.Clock()
+    plocha = Plocha
 
     while ideto:
         cas.tick(FPS)
@@ -21,6 +23,9 @@ def main():
                 ideto = False
             if udalost.type == pygame.MOUSEBUTTONDOWN:
                 pass
+
+        pygame.stvorceky(PLOCHA)
+        pygame.display.update()
 
     pygame.quit()
 
