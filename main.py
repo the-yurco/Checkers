@@ -2,6 +2,8 @@ from webbrowser import get
 import pygame
 from checkers.constants import SIRKA , VYSKA 
 
+pygame.init()
+
 FPS = 60
 
 PLOCHA = pygame.display.set_mode((SIRKA,VYSKA))
@@ -14,10 +16,10 @@ def main():
     while ideto:
         cas.tick(FPS)
         
-        for udalost in pygame.event,get():
+        for udalost in pygame.event.get():
             if udalost.type == pygame.QUIT:
                 ideto = False
-            if udalost._type == pygame.MOUSEBUTTONDOWN:
+            if udalost.type == pygame.MOUSEBUTTONDOWN:
                 pass
 
     pygame.quit()
