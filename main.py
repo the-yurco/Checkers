@@ -24,7 +24,7 @@ def main():
             if udalost.type == pygame.MOUSEBUTTONDOWN:
                 pass
 
-        plocha.vykreslit_stvorceky(PLOCHA)
+        plocha.vykreslovanie(PLOCHA)
         pygame.display.update()
 
     pygame.quit()
