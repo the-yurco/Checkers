@@ -11,3 +11,4 @@ BIELA = (255,255,255)       #enemaci
 CIERNA = (0,0,0)            #nase postavicky
 SIVA = (125,125,125)        #tien
 MODRA = (0,0,255)           #ukazuje mozny pohyb
+
