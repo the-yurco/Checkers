@@ -1,4 +1,5 @@
 import pygame
+from tkinter import *
 from checkers.konstanty import CIERNA, SIRKA, STVORCEK, VYSKA
 from checkers.hra import Hra
 

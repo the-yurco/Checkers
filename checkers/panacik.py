@@ -15,8 +15,8 @@ class Panacik:
         self.kalkulovanie_pozicie()
 
     def kalkulovanie_pozicie(self): #vykalkuluje nam nasu x,y poziciu zalozenu na riadku a stlpci v ktorom su panacikovia
-        self.x = STVORCEK * self.riadok + STVORCEK // 2 #vyjadruje nam ze bude nas panacik v strede policka
-        self.y = STVORCEK * self.stlpec + STVORCEK // 2
+        self.x = STVORCEK * self.stlpec + STVORCEK // 2 #vyjadruje nam ze bude nas panacik v strede policka
+        self.y = STVORCEK * self.riadok + STVORCEK // 2
 
     def premenenie_na_krala(self):
         self.kral = True

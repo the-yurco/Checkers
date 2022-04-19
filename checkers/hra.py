@@ -32,7 +32,7 @@ class Hra:
                 self.zadat(riadok,stlpec)
 
         panacik = self.plocha.dostat_panacika(riadok, stlpec)
-        if panacik != 0 and self.panacik.farba == self.narade:
+        if panacik != 0 and panacik.farba == self.narade:
             self.oznaceny_panacik = panacik
             self.platne_pohyby = self.plocha.dostat_platne_pohyby(panacik)
             return True
@@ -49,6 +49,7 @@ class Hra:
             self.zmenit_narade()
         else:
             return False
+
         return True
 
     def vykreslit_platne_pohyby(self, pohyby):

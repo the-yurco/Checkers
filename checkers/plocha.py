@@ -109,11 +109,11 @@ class Plocha:
                     if krok == -1:
                         riadok = max(r -3, 0)
                     else:
-                        riadok = min(r +r, RIADKY)
+                        riadok = min(r +3, RIADKY)
 
                     pohyby.update(self._priecne_dolava(r + krok, riadok, krok, farba, dolava -1, preskoceny = posledny))
                     pohyby.update(self._priecne_doprava(r + krok, riadok, krok, farba, dolava +1, preskoceny = posledny))
-                    break 
+                break 
 
             elif aktualny.farba == farba:
                 break
@@ -143,11 +143,11 @@ class Plocha:
                     if krok == -1:
                         riadok = max(r -3, 0)
                     else:
-                        riadok = min(r +r, RIADKY)
+                        riadok = min(r +3, RIADKY)
 
                     pohyby.update(self._priecne_dolava(r + krok, riadok, krok, farba, doprava -1, preskoceny = posledny))
                     pohyby.update(self._priecne_doprava(r + krok, riadok, krok, farba, doprava +1, preskoceny = posledny))
-                    break 
+                break 
 
             elif aktualny.farba == farba:
                 break
