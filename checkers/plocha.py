@@ -35,25 +35,25 @@ class Plocha:
     def dostat_panacika(self, riadok, stlpec):
         return self.plocha[riadok][stlpec]
 
-    def vytvorenie_plochy(self): #toto bude reprezentovat nasu 'self.plocha = []' a budeme pridavat panacikov do listu
-        for riadok in range (RIADKY):
-            self.plocha.append([]) #prazdny list
+    def vytvorenie_plochy(self):                     #toto bude reprezentovat nasu 'self.plocha = []' a budeme pridavat panacikov do listu
+        for riadok in range (RIADKY):           
+            self.plocha.append([])                   #prazdny list
             for stlpec in range (STLPCE):
-                if stlpec % 2 == ((riadok + 1) % 2): # 
-                    if riadok < 3:
+                if stlpec % 2 == ((riadok + 1) % 2): #ak je aktualny stlpec % 2 == akykolvek riadok + 1 a % 2 nam vykresli panacika  
+                    if riadok < 3:                   #davame toto preto lebo chceme vykreslit nasich panacikov do prvych 3 riadkov
                         self.plocha[riadok].append(Panacik(riadok, stlpec, BIELA))
-                    elif riadok > 4 :
+                    elif riadok > 4 :                #davame toto preto lebo chceme vykreslit nasich panacikov do prvych 3 riadokv na druhej strane
                         self.plocha[riadok].append(Panacik(riadok, stlpec, CIERNA))
-                    else:
-                        self.plocha[riadok].append(0)
+                    else:                            
+                        self.plocha[riadok].append(0)#else nam dodava to ze tam kde nemame zadaneho panaka nam vykresli (NIC)
                 else:
                     self.plocha[riadok].append(0)
 
-    def vykreslenie(self, okno):
-        self.vykreslovanie_stvorcekov(okno)
-        for riadok in range(RIADKY):
+    def vykreslenie(self, okno):                        #vykresli nam vsetkych pancikov a stvorceky
+        self.vykreslovanie_stvorcekov(okno)             #vykresli nam panacikov v okne
+        for riadok in range(RIADKY):                    
             for stlpec in range(STLPCE):
-                panacik = self.plocha[riadok][stlpec]
+                panacik = self.plocha[riadok][stlpec]   #definovany panacik v liste riadku a stlpca
                 if panacik != 0:
                     panacik.vykreslenie(okno)
 

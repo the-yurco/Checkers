@@ -1,9 +1,9 @@
-import pygame
-from .konstanty import CIERNA, BIELA, STVORCEK, SIVA, KORUNA
+import pygame                                  #kniznica na vytvorenie hry
+from .konstanty import STVORCEK, SIVA, KORUNA  #importoval som potrebne konstanty
 
 class Panacik:
-    VYPLN = 13
-    OBRYS = 2
+    VYPLN = 13  #to co bude kolo panacika
+    OBRYS = 2   #to co bude panacika obkreslovat
 
     def __init__(self, riadok, stlpec, farba): #ked vytvorime noveho panacika musime mu urcit tieto veci !!!
         self.riadok = riadok
@@ -14,17 +14,17 @@ class Panacik:
         self.y = 0
         self.kalkulovanie_pozicie()
 
-    def kalkulovanie_pozicie(self): #vykalkuluje nam nasu x,y poziciu zalozenu na riadku a stlpci v ktorom su panacikovia
-        self.x = STVORCEK * self.stlpec + STVORCEK // 2 #vyjadruje nam ze bude nas panacik v strede policka
-        self.y = STVORCEK * self.riadok + STVORCEK // 2
+    def kalkulovanie_pozicie(self):                     #vykalkuluje nam nasu x,y poziciu zalozenu na riadku a stlpci v ktorom su panacikovia
+        self.x = STVORCEK * self.stlpec + STVORCEK // 2 #vyjadruje nam ze bude nas panacik v strede policka na x-ovej osi
+        self.y = STVORCEK * self.riadok + STVORCEK // 2 #vyjadruje nam ze bude nas panacik v strede policka na y-ovej osi
 
-    def premenenie_na_krala(self):
+    def premenenie_na_krala(self): #funkcia na premenu krala ked panacik dojde na koniec plochy
         self.kral = True
 
-    def vykreslenie(self, okno): #definuje nam ako bude panacik vyzerat
-        polomer = STVORCEK // 2 - self.VYPLN
-        pygame.draw.circle(okno, SIVA, (self.x, self.y,), polomer + self.OBRYS) #obrys   
-        pygame.draw.circle(okno, self.farba, (self.x, self.y,), polomer)        #panacik
+    def vykreslenie(self, okno):   #definuje nam ako bude panacik vyzerat
+        polomer = STVORCEK // 2 - self.VYPLN                                    #velkost panacika
+        pygame.draw.circle(okno, SIVA, (self.x, self.y,), polomer + self.OBRYS) #vykreslenie obrysu pomocou pygamu
+        pygame.draw.circle(okno, self.farba, (self.x, self.y,), polomer)        #vykreslenie pancika pomocou pygamu
         if self.kral:
             okno.blit(KORUNA, (self.x - KORUNA.get_width() // 2, self.y - KORUNA.get_height() // 2))
 

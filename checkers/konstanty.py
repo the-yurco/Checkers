@@ -12,4 +12,4 @@ CIERNA = (0,0,0)            #nase postavicky
 SIVA = (125,125,125)        #tien
 MODRA = (0,0,255)           #ukazuje mozny pohyb
 
-KORUNA = pygame.transform.scale(pygame.image.load('assets/crown.png'), (44, 25))
+KORUNA = pygame.transform.scale(pygame.image.load('assets/crown.png'), (44, 25))  #obrazok krala

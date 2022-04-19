@@ -1,13 +1,13 @@
-import pygame
-from .konstanty import CIERNA, BIELA, MODRA, STVORCEK
-from checkers.plocha import Plocha 
+import pygame                                           #kniznica na robenie hry
+from .konstanty import CIERNA, BIELA, MODRA, STVORCEK   #imporoval som konstanty ktore som potreboval
+from checkers.plocha import Plocha                      #importoval som klasu 'Plocha' ktoru som potreboval
 
 class Hra:
     def __init__(self, okno):
         self._init()
         self.okno = okno
 
-    def update(self):
+    def update(self): 
         self.plocha.vykreslenie(self.okno)
         self.vykreslit_platne_pohyby(self.platne_pohyby)
         pygame.display.update()
