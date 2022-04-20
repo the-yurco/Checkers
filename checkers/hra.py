@@ -1,13 +1,18 @@
+'''
+1. kto je na rade
+2. selektli sme nasho panaka ?
+3. mozme ho posunut sem, sem, tam...
+'''
 import pygame                                           #kniznica na robenie hry
 from .konstanty import CIERNA, BIELA, MODRA, STVORCEK   #imporoval som konstanty ktore som potreboval
 from checkers.plocha import Plocha                      #importoval som klasu 'Plocha' ktoru som potreboval
 
-class Hra:
-    def __init__(self, okno):
+class Hra:                                              #nasa klasa 'Hra'
+    def __init__(self, okno):                           
         self._init()
         self.okno = okno
 
-    def update(self): 
+    def update(self):                                   #updatovanie plochy
         self.plocha.vykreslenie(self.okno)
         self.vykreslit_platne_pohyby(self.platne_pohyby)
         pygame.display.update()
@@ -15,18 +20,18 @@ class Hra:
     def _init(self):
         self.oznaceny_panacik = None
         self.plocha = Plocha()
-        self.narade = CIERNA
+        self.narade = CIERNA                            #urcuje nam kto ide prvy
         self.platne_pohyby = {}
 
     def vyhra(self):
         return self.plocha.vyhra()
 
-    def reset(self):
+    def reset(self):                                    #resetovanie hry
         self._init()
 
-    def zadat(self, riadok, stlpec):
-        if self.oznaceny_panacik:
-            vysledok = self._pohyb(riadok, stlpec)
+    def zadat(self, riadok, stlpec):                    #zadavanie riadku a stlpca + ak som urcite zadal panacika tak sa moze pohnut ale nemusim a mozem kliknut na druheho
+        if self.oznaceny_panacik:                       #ak sme oznacili urciteho panacika
+            vysledok = self._pohyb(riadok, stlpec)      #tak ho mozme posunut ako vidime v urcitom (riadok, stlpec)
             if not vysledok:
                 self.oznaceny_panacik = None
                 self.zadat(riadok,stlpec)

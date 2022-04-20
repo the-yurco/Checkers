@@ -26,12 +26,13 @@ class Panacik:
         pygame.draw.circle(okno, SIVA, (self.x, self.y,), polomer + self.OBRYS) #vykreslenie obrysu pomocou pygamu
         pygame.draw.circle(okno, self.farba, (self.x, self.y,), polomer)        #vykreslenie pancika pomocou pygamu
         if self.kral:
-            okno.blit(KORUNA, (self.x - KORUNA.get_width() // 2, self.y - KORUNA.get_height() // 2))
+            okno.blit(KORUNA, (self.x - KORUNA.get_width() // 2, self.y - KORUNA.get_height() // 2)) #vykreslenie obarzku do stredu panacika
+            #blit znamena ze dame nejaky obrazok alebo fotku na dane misto na nasej ploche
 
-    def pohyb(self, riadok, stlpec):
+    def pohyb(self, riadok, stlpec): #toto je to iste co v 'plocha.py' len definovane tu
         self.riadok = riadok
         self.stlpec = stlpec
         self.kalkulovanie_pozicie()
 
-    def __repr__(self):
+    def __repr__(self):           
         return str(self.farba)

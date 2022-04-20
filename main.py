@@ -16,9 +16,9 @@ OKNO = pygame.display.set_mode((SIRKA, VYSKA))  #rozmery na plochu hry
 pygame.display.set_caption('DAMA')              #nadpis okna
 
 def pohybovanie_s_myskou(pozicia):  #funkcia na pohyb s myskou
-    x, y = pozicia
-    riadok = y // STVORCEK
-    stlpec = x // STVORCEK
+    x, y = pozicia                  #zadali sme ze x,y osi su nasa urcena pozicia
+    riadok = y // STVORCEK          #zadali sme co znamena nasa y-ova os  (ak je y = 700 to znamena ze je to riadok 7 atd...)
+    stlpec = x // STVORCEK          #zadali sme co znamena nasa x-ova os
     return riadok, stlpec
 
 def main():                         #hlavna funkcia
@@ -38,9 +38,9 @@ def main():                         #hlavna funkcia
             if udalost.type == pygame.QUIT:
                 ideto = False
  
-            if udalost.type == pygame.MOUSEBUTTONDOWN: #pohyb panacikov s pouzitim mysky
-                pozicia = pygame.mouse.get_pos()
-                riadok, stlpec = pohybovanie_s_myskou(pozicia)
+            if udalost.type == pygame.MOUSEBUTTONDOWN:          #pohyb panacikov s pouzitim mysky
+                pozicia = pygame.mouse.get_pos()                #definujeme co je nasa urcena pozicia
+                riadok, stlpec = pohybovanie_s_myskou(pozicia)  #jednoducho klikneme na nasho panacika a potom klikneme na moznu pozicku
                 hra.zadat(riadok,stlpec)
 
         hra.update()
