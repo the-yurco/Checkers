@@ -1,7 +1,9 @@
 """
-1. panacikovia ako sa hybu
-2. pohyb panacikov
-3. mazanie panacikov
+1. POHYB PANACIKOV
+2. MAZANIE PANACIKOV
+3. VYKRESLENIE PLOCHY
+4. VYTVORENIE CELKOVEJ PLOCHY
+5. PRIECNE POHYBY
 """
 import pygame                                                                   #kniznica na vytvaranie hry
 from .konstanty import BIELA, CIERNA, HNEDA, KREMOVA, RIADKY, STLPCE, STVORCEK  #importoval som potrebne konstanty
@@ -74,32 +76,44 @@ class Plocha:
 
         return None
 
-    #funkcia pre 
+    #funkcia pre vsetky mozne a platne pohyby
     def dostat_platne_pohyby(self, panacik):
-        pohyby = {}                     #tu budeme ukladat mozne pohyby, ze kde sa mozme potencionalne pohnut
+        pohyby = {}                     #tu budeme ukladat mozne pohyby, ze kde sa mozme potencionalne pohybovat
         dolava = panacik.stlpec - 1     #zadali sme co znamena ist dolava (v stlpcoch)
         doprava = panacik.stlpec + 1    #zadali sme co znamena ist doprava (v stlpcoch)
-        riadok = panacik.riadok         
+        riadok = panacik.riadok         #zadali sme co znamena samotny riadok
 
         if panacik.farba == CIERNA or panacik.kral:   #mozne pohyby pre krala
+
+            #chcem updatovat akekolvek pohyby z tych zatvoriek 
+            #v zatvorkach zacinam tym ze prechadzam priecne vlavo, potom prechadzam riadok -1 (ak sme cierny tak sa pohybujeme hore)Takže musíme skontrolovať smerom nahor, aby sme zistili, či je tam nieco platne
+            #takze musime zacat v rade nad sucastnym riadokm, v ktorom sa nachadzame
+            #potom tam mame ze 'max' to znamena kolko riadkov do hora sa budem pozerat
+            #budem sa pozerat na riadok(-3, alebo -1) maximmum z toho, cize -1 to zastavi a znamena to potom aby sa pozrel len o 2 hore
+            #panacik.farba - znamena farbu panaka, dolava - znamena ze je to miesto kde zacneme pre nas stlpec a co budeme odpocitat, ked sa budeme pohybovat nahor
             pohyby.update(self._priecne_dolava(riadok -1, max(riadok -3, -1), -1, panacik.farba, dolava))       
             pohyby.update(self._priecne_doprava(riadok -1, max(riadok -3, -1), -1, panacik.farba, doprava))
+
         if panacik.farba == BIELA or panacik.kral:    #mozne pohyby pre krala
             pohyby.update(self._priecne_dolava(riadok +1, min(riadok +3, RIADKY), 1, panacik.farba, dolava))
             pohyby.update(self._priecne_doprava(riadok +1, min(riadok +3, RIADKY), 1, panacik.farba, doprava))
 
         return pohyby
 
-    #funkcia urcujuca kde budeme zacianat, kde budeme stat, kolkokrat sa mozeme pohnut, aka je farba, dolava (strana), a preskoceny
+    #funkcia urcujuca kde budeme zacinat, kde budeme stat, kolkokrat sa mozeme pohnut, aka je farba, dolava (strana), a preskoceny
     def _priecne_dolava(self, start, stop, krok, farba, dolava, preskoceny = []): #diagonalne pohyby dolava
         pohyby = {}                                                 
         posledny = []
-        for r in range(start, stop, krok):                      #tento cyklus nam hovori ze v ktorom riadku (startujeme, stopujeme a kde budem chodit)
+
+        #premenná, ktorá pre nás sleduje ľavú stranu, ktorú len zvyšujeme, keď sa pohybujeme v radoch, to nás opäť posunie ako diagonálny vzor, čo je to, čo sa snažíme hľadať
+        for r in range(start, stop, krok):                      #tento cyklus nam hovori ze v ktorom riadku (startujeme, stopujeme a kde budeme chodit)
             if dolava < 0:                                      
                 break
 
             aktualny = self.plocha[r][dolava]                   #
-            if aktualny == 0:
+
+            #ak dalsi stvorec je prazdny po preskoceni panaka, nemozme tam ist pretoze musime skocit na ineho panaka ptom zas na ineho panaka aby to bolo platne
+            if aktualny == 0:                
                 if preskoceny and not posledny:
                     break
                 elif preskoceny:

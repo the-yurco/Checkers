@@ -1,3 +1,6 @@
+"""
+1. ZADANE ROZMERY, FARBY, OBRAZOK S KORUNOU
+"""
 import pygame
 
 VYSKA, SIRKA = 800, 800     #sirka a vyska nasho okna

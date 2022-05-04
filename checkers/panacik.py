@@ -1,3 +1,9 @@
+"""
+1. VYTVORENIE PANAKA
+2. FARBY, OBRYSY, PANAKOU
+3. PRESNE UMIESTNENIE PANAKOU NA PLOCHE (POLICKA)
+4. PREMENA KRALA
+"""
 import pygame                                  #kniznica na vytvorenie hry
 from .konstanty import STVORCEK, SIVA, KORUNA  #importoval som potrebne konstanty
 

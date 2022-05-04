@@ -1,13 +1,13 @@
 '''
-1. cele spustenie hry
-2. hlavne rozmery + nadpis
-3. fps
-4. vyuzivanie mysky
+1. CELA HRA 
+2. ROZMERY OKNA + NADPIS
+3. FPS-ka
+4. VYUZIVANIE MYSKY
 '''
 
 import pygame                                                 #kniznica na tvorenie hry
 from tkinter import *                                         #kniznica na tvorenie menucka
-from checkers.konstanty import CIERNA, KREMOVA, SIRKA, SIVA, STVORCEK, VYSKA #importoval som konstanty aby som mohol s nimi pracovat
+from checkers.konstanty import SIRKA,STVORCEK, VYSKA          #importoval som konstanty aby som mohol s nimi pracovat
 from checkers.hra import Hra
 
 

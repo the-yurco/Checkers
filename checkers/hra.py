@@ -1,7 +1,7 @@
 '''
-1. kto je na rade
-2. selektli sme nasho panaka ?
-3. mozme ho posunut sem, sem, tam...
+1. KTO JE NA RADE?
+2. KONTROLA CI SME SELEKTLI NASHO PANAKA
+3. KONTROLA CI HO MOZME POHNUT TAM, TAM, SEM...
 '''
 import pygame                                           #kniznica na robenie hry
 from .konstanty import CIERNA, BIELA, MODRA, STVORCEK   #imporoval som konstanty ktore som potreboval
@@ -18,10 +18,10 @@ class Hra:                                              #nasa klasa 'Hra'
         pygame.display.update()
 
     def _init(self):
-        self.oznaceny_panacik = None
+        self.oznaceny_panacik = None                    #ziaden oznaceny panak
         self.plocha = Plocha()
         self.narade = CIERNA                            #urcuje nam kto ide prvy
-        self.platne_pohyby = {}
+        self.platne_pohyby = {}                         #obsah pre platne pohyby
 
     def vyhra(self):                                    #definicia pre vyvolanie vyhry
         return self.plocha.vyhra()
@@ -50,7 +50,7 @@ class Hra:                                              #nasa klasa 'Hra'
     def _pohyb(self, riadok, stlpec):
         panacik = self.plocha.dostat_panacika(riadok, stlpec)                                   #panacik ktoreho chceme pohnut na urcitom riadku a stlpci
         if self.oznaceny_panacik and panacik == 0 and (riadok, stlpec) in self.platne_pohyby:   #ak zadame panaka, a ak zadany panak je 0 takze tam nestoji dalsi panak tak sa moze pohnut na 'platne pohyby'
-            self.plocha.pohyb(self.oznaceny_panacik, riadok, stlpec)                            #
+            self.plocha.pohyb(self.oznaceny_panacik, riadok, stlpec)                            #mozme pohnut panaka na urcity riadok a stlpec
             preskoceny = self.platne_pohyby[(riadok, stlpec)]                                   #
             if preskoceny:
                 self.plocha.odstranit(preskoceny)
@@ -63,7 +63,7 @@ class Hra:                                              #nasa klasa 'Hra'
     #funkcia ktora nam urcuje tie modre bodky pre znazornenie moznych pohybov
     def vykreslit_platne_pohyby(self, pohyby):
         for pohyb in pohyby:                    #cyklus pre pohyby
-            riadok, stlpec = pohyb              #miesta rovnajuce sa pohybu
+            riadok, stlpec = pohyb              #miesta rovnajuce sa platnemu pohybu
             pygame.draw.circle(self.okno, MODRA, (stlpec * STVORCEK + STVORCEK // 2 , riadok * STVORCEK + STVORCEK // 2 ), 15) #vykreslenie a znazornenie bodiek
 
     #toto je jednoducha funkcia na to aby sa islo po rade, kto ma ist teraz, kto teraz atd...
