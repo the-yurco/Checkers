@@ -74,29 +74,31 @@ class Plocha:
 
         return None
 
+    #funkcia pre 
     def dostat_platne_pohyby(self, panacik):
-        pohyby = {}
-        dolava = panacik.stlpec - 1
-        doprava = panacik.stlpec + 1
-        riadok = panacik.riadok
+        pohyby = {}                     #tu budeme ukladat mozne pohyby, ze kde sa mozme potencionalne pohnut
+        dolava = panacik.stlpec - 1     #zadali sme co znamena ist dolava (v stlpcoch)
+        doprava = panacik.stlpec + 1    #zadali sme co znamena ist doprava (v stlpcoch)
+        riadok = panacik.riadok         
 
-        if panacik.farba == CIERNA or panacik.kral:
-            pohyby.update(self._priecne_dolava(riadok -1, max(riadok -3, -1), -1, panacik.farba, dolava))
+        if panacik.farba == CIERNA or panacik.kral:   #mozne pohyby pre krala
+            pohyby.update(self._priecne_dolava(riadok -1, max(riadok -3, -1), -1, panacik.farba, dolava))       
             pohyby.update(self._priecne_doprava(riadok -1, max(riadok -3, -1), -1, panacik.farba, doprava))
-        if panacik.farba == BIELA or panacik.kral:
+        if panacik.farba == BIELA or panacik.kral:    #mozne pohyby pre krala
             pohyby.update(self._priecne_dolava(riadok +1, min(riadok +3, RIADKY), 1, panacik.farba, dolava))
             pohyby.update(self._priecne_doprava(riadok +1, min(riadok +3, RIADKY), 1, panacik.farba, doprava))
 
         return pohyby
 
+    #funkcia urcujuca kde budeme zacianat, kde budeme stat, kolkokrat sa mozeme pohnut, aka je farba, dolava (strana), a preskoceny
     def _priecne_dolava(self, start, stop, krok, farba, dolava, preskoceny = []): #diagonalne pohyby dolava
-        pohyby = {}
+        pohyby = {}                                                 
         posledny = []
-        for r in range(start, stop, krok):
-            if dolava < 0:
+        for r in range(start, stop, krok):                      #tento cyklus nam hovori ze v ktorom riadku (startujeme, stopujeme a kde budem chodit)
+            if dolava < 0:                                      
                 break
 
-            aktualny = self.plocha[r][dolava]
+            aktualny = self.plocha[r][dolava]                   #
             if aktualny == 0:
                 if preskoceny and not posledny:
                     break
@@ -123,6 +125,7 @@ class Plocha:
 
         return pohyby
 
+    #funkcia urcujuca kde budeme zacianat, kde budeme stat, kolkokrat sa mozeme pohnut, aka je farba, dolava (strana), a preskoceny
     def _priecne_doprava(self, start, stop, krok, farba, doprava, preskoceny = []): #diagonalne pohyby doprava
         pohyby = {}
         posledny = []
