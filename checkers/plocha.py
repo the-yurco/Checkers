@@ -59,7 +59,7 @@ class Plocha:
                 if panacik != 0:
                     panacik.vykreslenie(okno)
 
-    def odstranit(self, panacikovia):
+    def odstranit(self, panacikovia):                        #
         for panacik in panacikovia:
             self.plocha[panacik.riadok][panacik.stlpec] = 0
             if panacik != 0:
@@ -68,7 +68,7 @@ class Plocha:
                 else:
                     self.biely_vlavo -= 1
 
-    def vyhra(self):
+    def vyhra(self):                    #definicia pre vyhru
         if self.cierny_vlavo <= 0:
             return BIELA
         elif self.biely_vlavo <= 0:
@@ -106,27 +106,29 @@ class Plocha:
         posledny = []
 
         #premenná, ktorá pre nás sleduje ľavú stranu, ktorú len zvyšujeme, keď sa pohybujeme v radoch, to nás opäť posunie ako diagonálny vzor, čo je to, čo sa snažíme hľadať
-        for r in range(start, stop, krok):                      #tento cyklus nam hovori ze v ktorom riadku (startujeme, stopujeme a kde budeme chodit)
+        for r in range(start, stop, krok):                          #tento cyklus nam hovori ze v ktorom riadku (startujeme, stopujeme a kde budeme chodit)
             if dolava < 0:                                      
                 break
 
-            aktualny = self.plocha[r][dolava]                   #
+            aktualny = self.plocha[r][dolava]                       #
 
-            #ak dalsi stvorec je prazdny po preskoceni panaka, nemozme tam ist pretoze musime skocit na ineho panaka ptom zas na ineho panaka aby to bolo platne
-            if aktualny == 0:                
-                if preskoceny and not posledny:
+            #tuto sa jedna o mozne dosledky ktore sa mozu stat kde sa mozme/nemozme pohnut, kde sa mozme/nemozme skocit, spojene z farbou ktorou hybeme panaka
+            #stale sa opakuje a hlada mozny 'tah' ak to mozem tak nazvat
+            if aktualny == 0:                                       #1. najdeme platneho panaka
+                if preskoceny and not posledny:                     
                     break
-                elif preskoceny:
-                    pohyby[(r, dolava)] = posledny + preskoceny
+                elif preskoceny:                                    #preskocime cez nejakeho
+                    pohyby[(r, dolava)] = posledny + preskoceny     #vieme ci mozme preskocit 1 alebo 2 a ktory potrebujeme odstranit
                 else:
                     pohyby[(r, dolava)] = posledny
 
-                if posledny:
+                if posledny:                                        #2. preskocime cez nejaky / rozhodneme sa ci mozme nahodou dat double alebo triple
                     if krok == -1:
                         riadok = max(r -3, 0)
                     else:
                         riadok = min(r +3, RIADKY)
 
+                    #3. toto by to malo zopakovat rekurzivne (urobit to este raz) a vidiet ci mozme dat vlastne ten double alebo triple
                     pohyby.update(self._priecne_dolava(r + krok, riadok, krok, farba, dolava -1, preskoceny = posledny))
                     pohyby.update(self._priecne_doprava(r + krok, riadok, krok, farba, dolava +1, preskoceny = posledny))
                 break 
