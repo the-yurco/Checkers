@@ -28,13 +28,13 @@ class Plocha:
 
         #toto je nato aby ked pride enemy panacik na posledny/prvy riadok tak sa stane kralom
         if riadok == RIADKY -1 or riadok == 0:           #ak sa pohneme na poziciu 0 alebo 7 'riadok' znamena to ze sme na konci/zaciatku plochy
-            panacik.premenenie_na_krala()
+            panacik.premenenie_na_krala()                #no a panacik sa premeni na krala
             if panacik.farba == BIELA:                   #toto bude len kontrolvat kedy ma akeho krala spravit z akeho panacika 'farba'
                 self.biely_krali += 1
             else:
                 self.cierny_krali += 1
 
-    def dostat_panacika(self, riadok, stlpec):          #ty zadas tomuto Board objektu presny riadok + stlpec = 'mozna pozicia' a da ti tam panacika
+    def dostat_panacika(self, riadok, stlpec):          #ty zadas tomuto 'Plocha' objektu presny riadok + stlpec = 'mozna pozicia' a da ti tam panacika
         return self.plocha[riadok][stlpec]
 
     def vytvorenie_plochy(self):                        #toto bude reprezentovat nasu 'self.plocha = []' a budeme pridavat panacikov do listu
@@ -51,7 +51,7 @@ class Plocha:
                 else:
                     self.plocha[riadok].append(0)
 
-    def vykreslenie(self, okno):                        #vykresli nam vsetkych pancikov a stvorceky
+    def vykreslenie(self, okno):                        #vykresli nam vsetkych panacikov a stvorceky
         self.vykreslovanie_stvorcekov(okno)             #vykresli nam panacikov v okne
         for riadok in range(RIADKY):                    
             for stlpec in range(STLPCE):
@@ -59,7 +59,7 @@ class Plocha:
                 if panacik != 0:
                     panacik.vykreslenie(okno)
 
-    def odstranit(self, panacikovia):                        #
+    def odstranit(self, panacikovia):                        #definicia pre vymazanie panaka
         for panacik in panacikovia:
             self.plocha[panacik.riadok][panacik.stlpec] = 0
             if panacik != 0:
@@ -68,6 +68,9 @@ class Plocha:
                 else:
                     self.biely_vlavo -= 1
 
+    def font_pixel(velkost):
+        return pygame.font.Font("font.ttf", velkost)
+
     def vyhra(self):                    #definicia pre vyhru
         if self.cierny_vlavo <= 0:
             return BIELA
@@ -75,6 +78,8 @@ class Plocha:
             return CIERNA
 
         return None
+    
+    
 
     #funkcia pre vsetky mozne a platne pohyby
     def dostat_platne_pohyby(self, panacik):
@@ -110,9 +115,9 @@ class Plocha:
             if dolava < 0:                                      
                 break
 
-            aktualny = self.plocha[r][dolava]                       #
+            aktualny = self.plocha[r][dolava]                       
 
-            #tuto sa jedna o mozne dosledky ktore sa mozu stat kde sa mozme/nemozme pohnut, kde sa mozme/nemozme skocit, spojene z farbou ktorou hybeme panaka
+            #tuto sa jedna o mozne dosledky ktore sa mozu stat kde sa mozme/nemozme pohnut, kde mozme/nemozme skocit, spojene z farbou ktorou hybeme panaka
             #stale sa opakuje a hlada mozny 'tah' ak to mozem tak nazvat
             if aktualny == 0:                                       #1. najdeme platneho panaka
                 if preskoceny and not posledny:                     

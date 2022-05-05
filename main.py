@@ -5,16 +5,19 @@
 4. VYUZIVANIE MYSKY
 '''
 
-import pygame                                                 #kniznica na tvorenie hry
+import pygame
+from pygame import *                                          #kniznica na tvorenie hry
 from tkinter import *                                         #kniznica na tvorenie menucka
 from checkers.konstanty import SIRKA,STVORCEK, VYSKA          #importoval som konstanty aby som mohol s nimi pracovat
 from checkers.hra import Hra
-
 
 FPS = 60
 
 OKNO = pygame.display.set_mode((SIRKA, VYSKA))  #rozmery na plochu hry
 pygame.display.set_caption('DAMA')              #nadpis okna
+
+pygame.mixer.init()
+pygame.init()
 
 def pohybovanie_s_myskou(pozicia):  #funkcia na pohyb s myskou
     x, y = pozicia                  #zadali sme ze x,y osi su nasa urcena pozicia
@@ -24,6 +27,10 @@ def pohybovanie_s_myskou(pozicia):  #funkcia na pohyb s myskou
 
 
 def main():                         #hlavna funkcia
+
+    mixer.music.load('assets\checkerssoundtrack.mp3')   #muzika
+    mixer.music.play(-1)                                #to ze sa to bude opakovat
+
     ideto = True                    #runnuje to
     cas = pygame.time.Clock()       #fpska
     hra = Hra(OKNO)                 #hra sa spusti
@@ -31,7 +38,6 @@ def main():                         #hlavna funkcia
 
     while ideto:
         cas.tick(FPS)               #fpska
-
         if hra.vyhra() != None:     #ked niekto vyhra skonci sa hra
             print (hra.vyhra())
             ideto = False

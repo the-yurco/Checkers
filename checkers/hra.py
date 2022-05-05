@@ -13,8 +13,8 @@ class Hra:                                              #nasa klasa 'Hra'
         self.okno = okno
 
     def update(self):                                   #updatovanie plochy
-        self.plocha.vykreslenie(self.okno)
-        self.vykreslit_platne_pohyby(self.platne_pohyby)
+        self.plocha.vykreslenie(self.okno)              #update okna
+        self.vykreslit_platne_pohyby(self.platne_pohyby)#toto znamena ze sa nam updatne okno ked nam vykresli platne pohyby a my pohneme
         pygame.display.update()
 
     def _init(self):
@@ -26,7 +26,7 @@ class Hra:                                              #nasa klasa 'Hra'
     def vyhra(self):                                    #definicia pre vyvolanie vyhry
         return self.plocha.vyhra()
 
-    def reset(self):                                    #resetovanie hry
+    def reset(self):                                    
         self._init()
 
     #akykolvek input co robime na mape nam vyvolava tuto funkciu
@@ -51,7 +51,7 @@ class Hra:                                              #nasa klasa 'Hra'
         panacik = self.plocha.dostat_panacika(riadok, stlpec)                                   #panacik ktoreho chceme pohnut na urcitom riadku a stlpci
         if self.oznaceny_panacik and panacik == 0 and (riadok, stlpec) in self.platne_pohyby:   #ak zadame panaka, a ak zadany panak je 0 takze tam nestoji dalsi panak tak sa moze pohnut na 'platne pohyby'
             self.plocha.pohyb(self.oznaceny_panacik, riadok, stlpec)                            #mozme pohnut panaka na urcity riadok a stlpec
-            preskoceny = self.platne_pohyby[(riadok, stlpec)]                                   #
+            preskoceny = self.platne_pohyby[(riadok, stlpec)]                                   
             if preskoceny:
                 self.plocha.odstranit(preskoceny)
             self.zmenit_narade()
